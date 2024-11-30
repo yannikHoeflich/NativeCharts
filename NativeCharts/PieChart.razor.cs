@@ -100,6 +100,8 @@ public partial class PieChart : BlazorChart {
     protected override async Task Click(IContext2DWithoutGetters context, double x, double y) {
         double sum = Values.Sum(x => x.Value);
         double lastAngle = 0;
+
+        ChartValue? clickedValue = null;
         foreach (ChartValue value in Values) {
             if (lastAngle > _hoverAngle) {
                 return;
@@ -108,12 +110,19 @@ public partial class PieChart : BlazorChart {
             double angle = value.Value / sum;
             
             if (lastAngle + angle > _hoverAngle) {
-                await this.OnClick.InvokeAsync(value);
-                return;
+                clickedValue = value;
+                break;
             }
 
             lastAngle += angle;
         }
+
+        if (clickedValue is null) {
+            return;
+        }
+
+        await OnClick.InvokeAsync(clickedValue);
+
     }
 
     private double GetAngle(double x, double y) {
