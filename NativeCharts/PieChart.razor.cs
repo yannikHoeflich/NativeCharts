@@ -87,6 +87,7 @@ public partial class PieChart : BlazorChart {
                 IEnumerable<ColorName> nameColors = Values.Select(x => new ColorName(x.Color, x.Label));
 
                 await base.RenderLegend(context, nameColors, x, y, Width - _margin * 2);
+                return;
             } catch(InvalidOperationException) {
                 retries++;
             }
