@@ -78,7 +78,6 @@ public partial class BlazorChart {
 
     internal async Task RenderLegend(IContext2DWithoutGetters context, IEnumerable<ColorName> colorNames, double x, double y, double width) {
         double startX = x;
-        double startY = y;
 
         double blockSize = FontSize / 4.0 * 3;
         foreach (ColorName value in colorNames) {

@@ -80,10 +80,17 @@ public partial class PieChart : BlazorChart {
         if (Values is null) {
             return;
         }
-        
-        IEnumerable<ColorName> nameColors = Values.Select(x => new ColorName(x.Color, x.Label));
-        
-        await base.RenderLegend(context, nameColors, x, y, Width - _margin * 2);
+
+        int retries = 0;
+        while (retries < 10) {
+            try {
+                IEnumerable<ColorName> nameColors = Values.Select(x => new ColorName(x.Color, x.Label));
+
+                await base.RenderLegend(context, nameColors, x, y, Width - _margin * 2);
+            } catch(InvalidOperationException) {
+                retries++;
+            }
+        }
     }
 
     protected override async Task Hover(IContext2DWithoutGetters context, double x, double y) {
