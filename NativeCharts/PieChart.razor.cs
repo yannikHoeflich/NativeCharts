@@ -9,7 +9,7 @@ public partial class PieChart : BlazorChart {
     [Parameter]
     public List<ChartValue>? Values { get; set; }
 
-    protected double _hoverAngle = -1;
+    private double _hoverAngle = -1;
 
     protected int _margin = 20;
 
@@ -45,6 +45,11 @@ public partial class PieChart : BlazorChart {
         double lastAngle = 0;
         foreach (ChartValue value in Values) {
             double angle = value.Value / sum;
+
+            if (Math.Abs(angle - 1) < 0.0001) {
+                angle = 0.9999;
+            }
+            
             if (lastAngle < _hoverAngle && lastAngle + angle > _hoverAngle) {
                 await context.FillPartCircle(_margin, _margin, Radius, lastAngle, lastAngle + angle, value.Color.Highlight(1.4));
                 await context.StrokePartCircle(_margin, _margin, Radius, lastAngle, lastAngle + angle, this.BackgroundColor, 2);
