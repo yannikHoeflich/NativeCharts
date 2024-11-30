@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+        <SupportedPlatform Include="browser"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Excubo.Blazor.Canvas" Version="3.2.66" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="BlazorChart.helpers.cs">
+        <DependentUpon>BlazorChart.razor</DependentUpon>
+      </Compile>
+      <Compile Update="BlazorChart.Parameters.cs">
+        <DependentUpon>BlazorChart.razor</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+</Project>

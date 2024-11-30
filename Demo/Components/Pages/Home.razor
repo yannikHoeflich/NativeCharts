@@ -1,0 +1,30 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+@using BlazorCharts
+@using BlazorCharts.Models
+
+<PageTitle>Home</PageTitle>
+
+<PieChart InnerRadius="100" Width="500" Height="500" Values="_values" OnClick="Callback" ValueFormatter="ValueFormatters.Currency" BackgroundColor="new Color(230, 230, 230)"/>
+<DonutChart InnerRadius="100" Width="500" Height="500" Values="_values" OnClick="Callback" ValueFormatter="ValueFormatters.Currency" BackgroundColor="new Color(230, 230, 230)"/>
+
+<p>@_clickedValue</p>
+
+@code {
+    private List<ChartValue>? _values = [
+                                            new ChartValue("Id 1", "Area 1", 320, new Color(123, 5, 43)),
+                                            new ChartValue("Id 2", "Area 2", 230, new Color(5, 123, 43)),
+                                            new ChartValue("Id 3", "Area 3", 532, new Color(2, 23, 123)),
+                                            new ChartValue("Id 4", "Area 4", 58, new Color(5, 123, 123)),
+                                            new ChartValue("Id 5", "Area 5", 324, new Color(123, 123, 43)),
+                                        ];
+
+    private string _clickedValue = "";
+    
+    private void Callback(ChartValue obj) {
+        _clickedValue = obj.Label;
+        StateHasChanged();
+    }
+
+}

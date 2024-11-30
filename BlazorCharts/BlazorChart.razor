@@ -1,0 +1,3 @@
+﻿@using Excubo.Blazor.Canvas
+
+<canvas Width="@Width" Height="@Height" @ref="@_canvas" @onmouseenter="() => _mouseOver = true" @onmouseleave="HoverEnd" @onmousemove="MouseMove" @onclick="Click" />
