@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorCharts", "BlazorCharts\BlazorCharts.csproj", "{77B6762E-4BF8-4B40-90A8-5DEE002AFD78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NativeCharts", "NativeCharts\NativeCharts.csproj", "{77B6762E-4BF8-4B40-90A8-5DEE002AFD78}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "Demo\Demo.csproj", "{93BAB704-CA5A-47BC-9193-18050145E79A}"
 EndProject

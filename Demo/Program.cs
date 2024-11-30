@@ -1,6 +1,6 @@
-using BlazorCharts;
 using Demo.Components;
 using Microsoft.AspNetCore.Http.Connections;
+using NativeCharts;
 
 var builder = WebApplication.CreateBuilder(args);
 

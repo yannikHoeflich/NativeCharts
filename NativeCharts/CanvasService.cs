@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
-namespace BlazorCharts;
+namespace NativeCharts;
 
 public class CanvasService {
     private readonly IJSRuntime _js;

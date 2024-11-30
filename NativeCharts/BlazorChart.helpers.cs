@@ -1,8 +1,7 @@
-﻿using BlazorCharts.Models;
-using Excubo.Blazor.Canvas.Contexts;
-using Microsoft.AspNetCore.Components;
+﻿using Excubo.Blazor.Canvas.Contexts;
+using NativeCharts.Models;
 
-namespace BlazorCharts;
+namespace NativeCharts;
 
 public partial class BlazorChart {
     

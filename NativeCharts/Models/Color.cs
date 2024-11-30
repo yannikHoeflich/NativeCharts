@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace BlazorCharts.Models;
+﻿namespace NativeCharts.Models;
 
 public record Color(byte Red, byte Green, byte Blue) {
     public override string ToString() {

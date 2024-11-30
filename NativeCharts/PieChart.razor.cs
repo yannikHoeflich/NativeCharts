@@ -1,9 +1,8 @@
-﻿using BlazorCharts.Models;
-using Excubo.Blazor.Canvas.Contexts;
+﻿using Excubo.Blazor.Canvas.Contexts;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
+using NativeCharts.Models;
 
-namespace BlazorCharts;
+namespace NativeCharts;
 
 public partial class PieChart : BlazorChart {
     
@@ -14,7 +13,7 @@ public partial class PieChart : BlazorChart {
 
     protected int _margin = 20;
 
-    protected double Radius => (Math.Min(Width, Height) - _margin * 2) / 2.0;
+    protected double Radius => (Math.Min(this.Width, this.Height) - _margin * 2) / 2.0;
     protected double Middle => _margin + Radius;
 
     protected override async Task Render(IContext2DWithoutGetters context) {
@@ -92,7 +91,7 @@ public partial class PieChart : BlazorChart {
             double angle = value.Value / sum;
             
             if (lastAngle + angle > _hoverAngle) {
-                await OnClick.InvokeAsync(value);
+                await this.OnClick.InvokeAsync(value);
                 return;
             }
 

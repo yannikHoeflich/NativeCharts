@@ -1,8 +1,8 @@
-﻿using BlazorCharts.Models;
-using Excubo.Blazor.Canvas.Contexts;
+﻿using Excubo.Blazor.Canvas.Contexts;
 using Microsoft.AspNetCore.Components;
+using NativeCharts.Models;
 
-namespace BlazorCharts;
+namespace NativeCharts;
 
 public class DonutChart: PieChart {
     [Parameter]
@@ -12,8 +12,8 @@ public class DonutChart: PieChart {
     protected override async Task Render(IContext2DWithoutGetters context) {
         (double labelX, double labelY, ChartValue? selectedValue) = await RenderPie(context);
 
-        await context.Fill(BackgroundColor, async c => {
-            await c.EllipseAsync(Middle, Middle, InnerRadius, InnerRadius, 0, 0, 2 * Math.PI);
+        await context.Fill(this.BackgroundColor, async c => {
+            await c.EllipseAsync(this.Middle, this.Middle, InnerRadius, InnerRadius, 0, 0, 2 * Math.PI);
         });
         
         
@@ -25,8 +25,8 @@ public class DonutChart: PieChart {
     }
 
     protected override async Task Hover(IContext2DWithoutGetters context, double x, double y) {
-        double lx = x - (Radius + _margin);
-        double ly = y - (Radius + _margin);
+        double lx = x - (this.Radius + this._margin);
+        double ly = y - (this.Radius + this._margin);
 
         double r = Math.Sqrt(lx * lx + ly * ly);
 

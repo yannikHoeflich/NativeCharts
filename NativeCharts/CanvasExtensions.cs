@@ -1,10 +1,9 @@
 ﻿using System.Text;
-using BlazorCharts.Models;
 using Excubo.Blazor.Canvas;
 using Excubo.Blazor.Canvas.Contexts;
-using Microsoft.AspNetCore.Components;
+using NativeCharts.Models;
 
-namespace BlazorCharts;
+namespace NativeCharts;
 
 public static class CanvasExtensions {
     

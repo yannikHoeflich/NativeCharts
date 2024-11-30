@@ -1,11 +1,10 @@
-﻿using BlazorCharts.Models;
-using Excubo.Blazor.Canvas;
+﻿using Excubo.Blazor.Canvas;
 using Excubo.Blazor.Canvas.Contexts;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 
-namespace BlazorCharts;
+namespace NativeCharts;
 
 public abstract partial class BlazorChart : ComponentBase {
     [Inject]

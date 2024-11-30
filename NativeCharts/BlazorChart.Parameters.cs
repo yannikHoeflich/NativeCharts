@@ -1,7 +1,7 @@
-﻿using BlazorCharts.Models;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
+using NativeCharts.Models;
 
-namespace BlazorCharts;
+namespace NativeCharts;
 
 public partial class BlazorChart {
     [Parameter]

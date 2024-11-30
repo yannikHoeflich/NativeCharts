@@ -1,4 +1,4 @@
-namespace BlazorCharts;
+namespace NativeCharts;
 
 public delegate string ValueFormatter(double value);
 

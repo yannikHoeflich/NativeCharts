@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace BlazorCharts;
+namespace NativeCharts;
 
 public static class ServiceExtensions {
     public static void AddBlazorCharts(this IServiceCollection services) {
