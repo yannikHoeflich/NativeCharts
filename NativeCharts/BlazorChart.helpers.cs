@@ -27,14 +27,16 @@ public partial class BlazorChart {
         double totalWidth = Math.Max(valueWidth, labelWidth) + Margin * 3;
 
         y += labelHeight / 2.0;
+
+        bool arrowOnRight = x > Width / 2.0;
         
-        if (x > Width / 2) {
+        if (x > Width / 2.0) {
             x -= totalWidth;
         }
 
         y -= labelHeight;
-        await context.Fill(PopUpBackground.WithOpacity(150), async c => { await PopUpPath(x, y, c, Margin, totalWidth, labelHeight); });
-        await context.Stroke(PopUpBackground, 1, async c => { await PopUpPath(x, y, c, Margin, totalWidth, labelHeight); });
+        await context.Fill(PopUpBackground.WithOpacity(150), async c => { await PopUpPath(x, y, c, Margin, totalWidth, labelHeight, arrowOnRight); });
+        await context.Stroke(PopUpBackground, 1, async c => { await PopUpPath(x, y, c, Margin, totalWidth, labelHeight, arrowOnRight); });
         y += labelHeight;
                 
         await context.Text(PopUpPrimary, FontSize, async c => {
@@ -51,12 +53,12 @@ public partial class BlazorChart {
         IContext2DWithoutGetters context,
         int margin,
         double totalWidth,
-        int labelHeight) {
+        int labelHeight, bool arrowOnRight) {
         await context.MoveToAsync(x + margin, y);
 
         await context.LineToAsync(x + totalWidth - margin, y);
         await context.QuadraticCurveToAsync(x + totalWidth, y, x + totalWidth, y + margin);
-        if (x > Width / 2) {
+        if (arrowOnRight) {
             await context.LineToAsync(x + totalWidth, y + (labelHeight - margin) / 2 - 8);
             await context.LineToAsync(x + totalWidth + 8, y + (labelHeight - margin) / 2);
             await context.LineToAsync(x + totalWidth, y + (labelHeight - margin) / 2 + 8);
@@ -65,7 +67,7 @@ public partial class BlazorChart {
         await context.QuadraticCurveToAsync(x + totalWidth, y + labelHeight, x + totalWidth - margin, y + labelHeight);
         await context.LineToAsync(x + margin, y + labelHeight);
         await context.QuadraticCurveToAsync(x, y + labelHeight, x, y + labelHeight - margin);
-        if (x < Width / 2) {
+        if (!arrowOnRight) {
             await context.LineToAsync(x, y + (labelHeight - margin) / 2 + 8);
             await context.LineToAsync(x - 8, y + (labelHeight - margin) / 2);
             await context.LineToAsync(x, y + (labelHeight - margin) / 2 - 8);
