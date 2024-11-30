@@ -61,7 +61,24 @@ public partial class PieChart : BlazorChart {
             lastAngle += angle;
         }
 
+        if (HasLegend) {
+            await RenderLegend(context);
+        }
+
         return (labelX, labelY, selectedValue);
+    }
+
+    protected async Task RenderLegend(IContext2DWithoutGetters context) {
+        double x = _margin;
+        double y = Radius * 2 + _margin * 4;
+
+        if (Values is null) {
+            return;
+        }
+        
+        IEnumerable<ColorName> nameColors = Values.Select(x => new ColorName(x.Color, x.Label));
+        
+        await base.RenderLegend(context, nameColors, x, y, Width - _margin * 2);
     }
 
     protected override async Task Hover(IContext2DWithoutGetters context, double x, double y) {

@@ -27,5 +27,10 @@ public partial class BlazorChart {
 
     [Parameter]
     public ValueFormatter ValueFormatter { get; set; } = ValueFormatters.Default;
+    
+    [Parameter]
+    public bool HasLegend { get; set; } = true;
 
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> InputAttributes { get; set; }
 }

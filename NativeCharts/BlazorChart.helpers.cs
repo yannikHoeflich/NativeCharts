@@ -4,6 +4,9 @@ using NativeCharts.Models;
 namespace NativeCharts;
 
 public partial class BlazorChart {
+    protected const int Margin = 3;
+    protected const int FontSize = 16;
+    protected const int LineHeight = FontSize + 4;
     
     protected async Task<double> TextWidth(string text, int size, bool bold = false, bool italic = false) {
         if (_canvas is null) {
@@ -15,16 +18,13 @@ public partial class BlazorChart {
     
     
     protected async Task RenderPopUp(IContext2DWithoutGetters context, ChartValue value, double x, double y) {
-        const int margin = 3;
-        const int fontSize = 16;
-        const int lineHeight = fontSize + 4;
-        const int labelHeight = lineHeight * 2 + margin * 3;
+        const int labelHeight = LineHeight * 2 + Margin * 3;
         
-        double labelWidth = await TextWidth(value.Label, fontSize, bold: true);
+        double labelWidth = await TextWidth(value.Label, FontSize, bold: true);
 
         string valueString = ValueFormatter(value.Value);
-        double valueWidth = await TextWidth(valueString, fontSize, italic: true);
-        double totalWidth = Math.Max(valueWidth, labelWidth) + margin * 3;
+        double valueWidth = await TextWidth(valueString, FontSize, italic: true);
+        double totalWidth = Math.Max(valueWidth, labelWidth) + Margin * 3;
 
         y += labelHeight / 2.0;
         
@@ -33,16 +33,16 @@ public partial class BlazorChart {
         }
 
         y -= labelHeight;
-        await context.Fill(PopUpBackground.WithOpacity(150), async c => { await PopUpPath(x, y, c, margin, totalWidth, labelHeight); });
-        await context.Stroke(PopUpBackground, 1, async c => { await PopUpPath(x, y, c, margin, totalWidth, labelHeight); });
+        await context.Fill(PopUpBackground.WithOpacity(150), async c => { await PopUpPath(x, y, c, Margin, totalWidth, labelHeight); });
+        await context.Stroke(PopUpBackground, 1, async c => { await PopUpPath(x, y, c, Margin, totalWidth, labelHeight); });
         y += labelHeight;
                 
-        await context.Text(PopUpPrimary, fontSize, async c => {
-            await c.FillTextAsync(value.Label, x + margin, y - margin * 4 - lineHeight);
+        await context.Text(PopUpPrimary, FontSize, async c => {
+            await c.FillTextAsync(value.Label, x + Margin, y - Margin * 4 - LineHeight);
         }, bold: true);
                 
-        await context.Text(PopUpPrimary, fontSize, async c => {
-            await c.FillTextAsync(valueString, x + margin, y - margin * 2);
+        await context.Text(PopUpPrimary, FontSize, async c => {
+            await c.FillTextAsync(valueString, x + Margin, y - Margin * 2);
         }, italic: true);
     }
 
@@ -72,5 +72,36 @@ public partial class BlazorChart {
         }
         await context.LineToAsync(x, y + margin);
         await context.QuadraticCurveToAsync(x, y, x + margin, y);
+    }
+
+    internal async Task RenderLegend(IContext2DWithoutGetters context, IEnumerable<ColorName> colorNames, double x, double y, double width) {
+        double startX = x;
+        double startY = y;
+
+        double blockSize = FontSize / 4.0 * 3;
+        foreach (ColorName value in colorNames) {
+            double nameWidth = await TextWidth(value.Name, FontSize);
+
+            if (x + nameWidth + Margin + blockSize > startX + width) {
+                y += LineHeight * 2;
+                x = startX;
+            }
+            
+            await context.Fill(value.Color, async c => {
+                await c.RectAsync(x + 1, y + 1, blockSize - 2, blockSize - 2);
+            });
+
+            await context.Stroke(PrimaryColor, 2, async c => {
+                await c.RectAsync(x, y, blockSize, blockSize);
+            });
+
+            x += blockSize + Margin;
+
+            await context.Text(PrimaryColor, FontSize, async c => {
+                await c.FillTextAsync(value.Name, x, y + blockSize);
+            });
+
+            x += nameWidth + Margin * 15;
+        }
     }
 }

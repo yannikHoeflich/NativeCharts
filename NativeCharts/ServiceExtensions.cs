@@ -3,7 +3,7 @@
 namespace NativeCharts;
 
 public static class ServiceExtensions {
-    public static void AddBlazorCharts(this IServiceCollection services) {
+    public static void AddNativeCharts(this IServiceCollection services) {
         services.AddScoped<CanvasService>();
     }
 }
