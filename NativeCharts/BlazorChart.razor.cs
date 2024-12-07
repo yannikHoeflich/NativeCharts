@@ -58,9 +58,19 @@ public abstract partial class BlazorChart : ComponentBase {
         await using Batch2D? batch = _context.CreateBatch();
         await HoverEnd(batch);
     }
-    
+
+    private int _mouseHash = 0;
     private async Task MouseMove(MouseEventArgs args) {
         if (_context is null) {
+            return;
+        }
+
+        int mouseHash = args.OffsetX.GetHashCode() + args.OffsetX.GetHashCode();
+        _mouseHash = mouseHash;
+
+        await Task.Delay(10);
+
+        if (mouseHash != _mouseHash) {
             return;
         }
         

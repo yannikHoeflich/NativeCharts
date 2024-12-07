@@ -7,7 +7,7 @@
         <AssemblyName>NativeCharts</AssemblyName>
         <RootNamespace>NativeCharts</RootNamespace>
         <RepositoryUrl>https://github.com/yannikHoeflich/NativeCharts</RepositoryUrl>
-        <Version>0.1.4</Version>
+        <Version>0.1.5</Version>
         <PackageLicenseUrl>../LICENSE</PackageLicenseUrl>
     </PropertyGroup>
 
